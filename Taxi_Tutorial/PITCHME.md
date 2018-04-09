@@ -16,7 +16,7 @@
 <li class="fragment" data-fragment-index="3">Cleaning the raw data</li>
 <li class="fragment" data-fragment-index="4">Enriching the cleaned data</li>
 <li class="fragment" data-fragment-index="5">Creating an attribute file</li>
-<li class="fragment" data-fragment-index="6">Creating a training dataset to predict trip volume on a certain day</li>
+<li class="fragment" data-fragment-index="6">Creating a training dataset</li>
 <li class="fragment" data-fragment-index="7">Build a Generalized Linear Model</li>
 </ol>
 
@@ -26,8 +26,33 @@
 
 We will VS Code with the ECL plugin as our IDE for this project.
 
-1. Create a folder called Taxi_Tutorial. Open the folder in the VS Code editor. This will act as the projects working directory.
-2. Create another folder called Taxi under Taxi_Tutorial
-3. Create the following files under Taxi:
+1. Create a folder called Taxi_Tutorial. 
+2. Open the folder in the VS Code editor. 
+3. Create another folder called Taxi under Taxi_Tutorial.
+4. Create the following files under Taxi
 
 ----
+
+@title[Project Files]
+
+**Files.ecl**
+
+Contains all the layout definitions for all the files used in the project. 
+
+**01_Data_Import_Job.ecl**
+
+Contains the code to import data from the landing zone into Thor
+
+**02_Data_Import_Validate_Job.ecl**
+
+Contains the code to validate a data import
+
+**03_Clean_Job.ecl**
+
+Job that cleans and converts raw data to a cleaned version
+
+**04_Enrich_Job.ecl**
+
+Adds additional attributes to the cleaned data to make the dataset more valuable to the analysis process
+
+**05_Analyze_Job.ecl**
