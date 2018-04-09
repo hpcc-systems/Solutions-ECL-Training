@@ -5,11 +5,12 @@ Building an ECL application involves 6 steps:
 1. Defining the ECL application project structure
 2. Understanding the cluster setup
 3. Importing the data into Thor
-4. Clean the raw data and convert it to a standard form
+4. Clean the raw data 
 5. Enrich the data
-6. Performing analysis and creating an attribute file
-7. Create a training dataset for training Generalized Linear Model to predict future trips
-8. Build the GLM model
+6. Creating an attribute file
+7. Create a training dataset 
+8. Build the General Linear Model (GLM) to predict trip volume
+9. Export useful data for external consumption
 
 To understand these steps, let us consider a concrete example. We will start with Todd Schneider's excellent project at https://github.com/toddwschneider/nyc-taxi-data. The data contains 1.3 billion taxi and Uber trips originating in New York City. 
 
@@ -55,12 +56,9 @@ Create the training data set containing the pickup_year, pickup_month, pickup_da
 
 Builds the Generalized Linear Model by using the training data of pickup_year, pickup_month, pickup_day_of_week and count of trips
 
-**Data_Export_Job.ecl**
+**08_Data_Export_Job.ecl**
 
 Contains the code to export the data from Thor into the landing zone
-
-
-
 
 Edit the Files.ecl to add:
 
@@ -89,8 +87,7 @@ NOTE: Substitute {Your Scope Prefix} with a prefix like "~achala_training". If y
 
 # 2. Understanding the cluster setup
 
-One AWS Instance running Thor, ROXIE, Middleware Services and the Landing Zone. The instance IP address is 10.0.0.208 in the case of our example. For Thor, we have setup four slave processes. ROXIE is setup as a single process.
-
+One AWS Instance running Thor, ROXIE, Middleware Services and the Landing Zone. For Thor, we have setup four slave processes. ROXIE is setup as a single process.
 
 # 3. Importing the data into Thor
 
