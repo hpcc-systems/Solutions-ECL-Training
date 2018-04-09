@@ -35,7 +35,7 @@ We will VS Code with the ECL plugin as our IDE for this project.
 
 @title[Project Files]
 
-**Files.ecl**
+<span>**Files.ecl**</span>
 
 Contains all the layout definitions for all the files used in the project. 
 
