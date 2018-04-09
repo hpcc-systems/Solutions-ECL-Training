@@ -94,7 +94,7 @@ One AWS Instance running Thor, ROXIE, Middleware Services and the Landing Zone. 
 
 # 3. Importing the data into Thor
 
-A 100,000 record CSV data (sampled randomly across a 1.6 billion recordset) is available on the HPCC Systems playground [[landing zone|http://play.hpccsystems.com:8010/?Widget=ECLPlaygroundWidget]]
+A 100,000 record CSV data (sampled randomly across a 1.6 billion recordset) is available on the HPCC Systems playground [[landing zone |http://play.hpccsystems.com:8010/?Widget=ECLPlaygroundWidget]]
 
 HPCC System services are based on a micro services architecture. For importing a file the **FileSpray** service is used. Since the file **yellow_tripdata_2015.csv** is available on the landing zone server and is mapped to the directory /var/lib/HPCCSystems/mydropzone. To import the data, we can write an ECL program with the following action:
 
