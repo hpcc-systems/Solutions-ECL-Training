@@ -31,7 +31,7 @@ We will VS Code with the ECL plugin as our IDE for this project.
 3. Create another folder called Taxi under Taxi_Tutorial.
 4. Create the following files under Taxi
 
-----
+---
 
 @title[Project Files]
 
