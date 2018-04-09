@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Playground",
+            "type": "ecl",
+            "request": "launch",
+            "mode": "submit",
+            "workspace": "${workspaceRoot}",
+            "program": "${file}",
+            "protocol": "http",
+            "serverAddress": "10.173.147.1",
+            "port": 8010,
+            "rejectUnauthorized": false,
+            "targetCluster": "thor",
+            "eclccPath": "${config:ecl.eclccPath}",
+            "eclccArgs": [],
+            "includeFolders": "${config:ecl.includeFolders}",
+            "legacyMode": "${config:ecl.legacyMode}",
+            "resultLimit": 100,
+            "user": "",
+            "password": ""
+        }
+    ]
+}
