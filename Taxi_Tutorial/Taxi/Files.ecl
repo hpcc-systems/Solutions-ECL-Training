@@ -135,17 +135,18 @@ EXPORT Files := MODULE
         /* 
             Build the GLM model for predecting traffic
         */
-        EXPORT taxi_model_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_model.thor';
+        // EXPORT taxi_model_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_model.thor';
 
-        EXPORT taxi_model_layout := RECORD
-            unsigned2 pickup_year;
-            unsigned2 pickup_month;
-            unsigned2 pickup_day_of_month;
-            unsigned2 pickup_day_of_week;
-            unsigned4 cnt;
-        END;
+        // EXPORT taxi_model_layout := RECORD
 
-        EXPORT taxi_model_ds := DATASET(taxi_model_file_path, taxi_model_layout, THOR);    
+        // END;
 
+        // EXPORT taxi_model_ds := DATASET(taxi_model_file_path, taxi_model_layout, THOR);    
 
+        /*
+           Export
+        */ 
+
+        EXPORT taxi_analysis_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_analysis.csv';  
+        EXPORT taxi_analyze_csv_file_path := file_scope + '::taxi::out::yellow_tripdata_analyze.csv';
 END;

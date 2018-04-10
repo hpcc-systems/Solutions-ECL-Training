@@ -398,7 +398,114 @@ Edit the 05_Analyze_Job.ecl
 
 # 6. Create training data
 
-Given "pickup day of week", month and year
+Given "pickup day of week", "pickup day of month", "month" and "year", can we predict future trips?  We can certainly try. We will use the Generalized Linear Model (GLM) function in the new ECL ML library in the next step. But first, let us create a training set with the desired independent variables and  dependent variable.
+
+Modify the Files.ecl to add:
+
+```ecl
+        /*
+            Create a training file to train a GLM for predecting trip counts for a future date
+        */
+
+        EXPORT taxi_train_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_train.thor';
+
+        EXPORT taxi_train_layout := RECORD
+            unsigned2 pickup_year;
+            unsigned2 pickup_month;
+            unsigned2 pickup_day_of_month;
+            unsigned2 pickup_day_of_week;
+            unsigned4 cnt;
+        END;
+
+        EXPORT taxi_train_ds := DATASET(taxi_train_file_path, taxi_train_layout, THOR);    
+
+``` 
+
+Edit the 06_Train_Data_Job.ecl to add:
+
+```ecl
+        IMPORT STD;
+        IMPORT Taxi;
+
+        Taxi.Files.taxi_train_layout train(Taxi.Files.taxi_analyze_layout analyzed) := TRANSFORM
+            SELF.pickup_year := Std.Date.Year(analyzed.pickup_date);
+            SELF.pickup_month := Std.Date.Month(analyzed.pickup_date);
+            SELF.pickup_day_of_month := Std.Date.Day(analyzed.pickup_date);
+            SELF.pickup_day_of_week := Std.Date.DayOfWeek(analyzed.pickup_date);
+            SELF := analyzed;
+        END;  
+
+        trained := PROJECT(Taxi.Files.taxi_analyze_ds, train(LEFT)); 
+
+        OUTPUT(trained,,Taxi.Files.taxi_train_file_path, THOR, COMPRESSED, OVERWRITE);
+```
+
+The train code extracts the information from the analyzed dataset we had created in the previous step and creates the independent variables *pickup_year, pickup_month, pickup_day_of_month and pickup_day_of_week* in addition to keeping the *cnt* dependent variable. Execute the code and test the output.
+
+# 7. Create the GLB model using the training data
+
+Perquisites: The ML_Core and GLB bundles have to preinstalled in your development environment
+
+To install a bundle, execute "ecl bundle install <bundlefile>.ecl --remote"
+
+Now, edit the 07_GLM_Model_Job.ecl
+
+```ecl
+    IMPORT Taxi;
+    IMPORT ML_Core;
+    IMPORT GLM;
+    IMPORT ML_Core.Types AS Core_Types;  
+
+    ds := Taxi.Files.taxi_train_ds;
+    ML_Core.AppendSeqID(ds, id, ds_seq);      // label the rows with sequence numbers
+
+    ML_Core.toField(ds_seq, explanatory, id, , , 'pickup_day_of_week,pickup_day_of_month,pickup_month,pickup_year');
+    ML_Core.toField(ds_seq, dependent, id, , , 'cnt');
+
+    PoissonSetup := GLM.GLM(explanatory, dependent, GLM.Family.Poisson); 
+    PoissonModel := PoissonSetup.GetModel();
+    PoissonPreds := PoissonSetup.Predict(explanatory, PoissonModel);
+    PoissonDeviance := GLM.Deviance_Detail(dependent, PoissonPreds, PoissonModel, GLM.Family.Poisson);
+
+    OUTPUT(GLM.ExtractBeta_full(PoissonModel), NAMED('Model')); 
+    OUTPUT(PoissonPreds, NAMED('Preds'));
+    OUTPUT(PoissonDeviance, NAMED('Deviance'));  
+```
+
+
+Execute the code and view the outputs. The most interesting output is the Deviance. You will straightaway notice that the predictions are not very accurate (overfit). This is OK for our experiement because our training set was limited (a years worth is not much).
+
+
+# 8. Data export
+
+If you have interesting work to share with others . User the ECL DESPRAY activity. This will export the data from HPCC back to the landing zone. 
+
+Add to Files.ecl
+
+```ecl
+        /*
+           Export
+        */ 
+
+        EXPORT taxi_analysis_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_analysis.csv';  
+        EXPORT taxi_analyze_csv_file_path := file_scope + '::taxi::out::yellow_tripdata_analyze.csv';
+```
+
+Add to 08_Data_Export.ecl
+
+```ecl
+        IMPORT STD;
+        IMPORT Taxi;
+
+        OUTPUT(Taxi.Files.taxi_analyze_ds,,Taxi.Files.taxi_analyze_csv_file_path,CSV,OVERWRITE);
+
+        STD.File.DeSpray(Taxi.Files.taxi_analyze_file_path,
+            '10.0.0.208',
+            Taxi.Files.taxi_analysis_lz_file_path,
+            -1,
+            'http://play.hpccsystems.com:8010/FileSpray');
+```
+
 
 
 
