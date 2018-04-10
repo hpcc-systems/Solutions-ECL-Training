@@ -27,3 +27,14 @@ The goal of the architecture discussion is to provide an introduction of HPCC Sy
 The goal of the ECL programming discussion is to introduce the data scientist to the minimum tools needed to solution a real-world problem. You will be amazed how quickly you can get started and start solving problems. 
 
 [Go to  ECL Introduction Page](docs/ECL_Introduction.md)
+
+
+## An introduction to ECL programming structures
+Understand how to code a program using modular structure that enable you to create clean and reusable code.
+
+[Go to  ECL Introduction Page](docs/ECL_Programming_Structures.md)
+
+## Analyze NYC Taxi Trip Data using HPCC Systems and ECL
+You are introduced to an end to end coding example. Topics covered involve data importing, cleaning, enriching, analyzing, predicting using machine learning and exporting data.
+
+[Go to  Taxi Tutorial](Taxi_Tutorial/README.md)

@@ -25,7 +25,7 @@ The following are three important steps in data cleaning
 ### 1. Learn from data 
 
 Let us consider an example to prove the above statement:
-[[images/duplicate-names.png]]
+![](images/duplicate-names.png)
 
 An obvious typo is not significant to stop two records from being matched, and records that matched might not be a match.
 
@@ -34,10 +34,10 @@ Learning from data and the knowledge of the domain is important. A technology th
 ### 2. Enhance the accuracy of the data by using many versions
 
 Relying on a single version of truth has many drawbacks. Business logic developed using the single version can be wrong because of inaccurate data. 
-[[images/many-versions.png]]
+![](images/many-versions.png)
 
 The following example shows many versions of the data help accurately identify a person.
-[[images/many-versions-example.png]] 
+![](images/many-versions-example.png)
 
 ### 3. Standardize
 
@@ -54,7 +54,7 @@ Assuming that data has been cleaned, analyzing and providing insight from the da
 NOTE: We have a strict distinction between a clean step and a analysis step. From the earlier example, identifying Marcia and Karen as the same person is the responsibility of the clean step. Identifying that this person lived at three addresses is the responsibility of the analysis step. 
 
 The analysis process identifies interesting attributes and entity relations. Attributes are typically aggregation values (count, sum etc.) that can be valuable in building predictive models and end user reporting. 
-[[images/analysis-example.png]]
+![](images/analysis-example.png)
 
 ## Store and process Big Data
 
@@ -82,7 +82,7 @@ The core design goals for both Thor and Roxie are the same. Both process the dat
 The above is an example of a file with 8 records split into 4 parts with 2 records in each part. Each part is assigned to a process. A 100,000 record file would be split into 4 parts with each part containing 25,000 records.
 
 ## ECL
-ECL is a [[declarative|https://en.wikipedia.org/wiki/Declarative_programming]] programming language. The ECL code compiler generates a [[data flow graph|https://en.wikipedia.org/wiki/Data_flow_diagram]] by interpreting the flow of data within the program. An activity in the graph represents a data operation like a SORT or TRANSFORM. The lines between the activities represent the data that flows between the steps. In addition to the data flow graph, the compiler generates C++ code for each of the activity steps in the graph. The C++ code is compiled to a native DLL. At runtime, Thor or ROXIE interpret the activity graph and execute each step by providing the input to each step, executing the activity and flowing the results of the activity to the next step.   
+ECL is a [declarative](https://en.wikipedia.org/wiki/Declarative_programming) programming language. The ECL code compiler generates a [data flow graph](https://en.wikipedia.org/wiki/Data_flow_diagram) by interpreting the flow of data within the program. An activity in the graph represents a data operation like a SORT or TRANSFORM. The lines between the activities represent the data that flows between the steps. In addition to the data flow graph, the compiler generates C++ code for each of the activity steps in the graph. The C++ code is compiled to a native DLL. At runtime, Thor or ROXIE interpret the activity graph and execute each step by providing the input to each step, executing the activity and flowing the results of the activity to the next step.   
 
 A simple ECL program:
 
@@ -104,16 +104,16 @@ joinEmployeeAndSalary := JOIN(getEmployee, getSalary,
 OUTPUT(joinEmployeeAndSalary);
 ```
 
-[[Try the code here|http://play.hpccsystems.com:8010/?Widget=ECLPlaygroundWidget]]
+[Try the code here](http://play.hpccsystems.com:8010/?Widget=ECLPlaygroundWidget)
 
 ...and the ECL programs data flow graph:
 
-[[images/ecl-graph.png]] 
+![](images/ecl-graph.png) 
 
 ## Thor
 
 The Thor cluster is based on a master/slave design. Each data partition is processed by a slave process, and a master process manages the slave processes.
-[[images/thor-master-slave.png]]
+![](images/thor-master-slave.png)
 
 ### The Middleware
 
@@ -125,18 +125,18 @@ The Middleware are a set of services that manage Thor clusters. They are respons
 * A management interface to observe the results, start and stop program executions, and manage the cluster components
 
 The Thor middleware components:
-[[images/middleware.png]]
+![](images/middleware.png)
 
 A Thor cluster can run on a single compute node or multiple compute node as show below. 
 
 
-[[images/thor-single-server.png]]
+![](images/thor-single-server.png)
 
 
 
 
 
-[[images/thor-multi-server.png]]
+![](images/thor-multi-server.png)
 
 
 
@@ -146,7 +146,7 @@ Production environments should run the middleware services on a separate node (o
 
 ECL programs are executed on Thor by submitting the program code to the ESP service. The following describes the execution flow:
 
-[[images/program-execution-thor.png]]
+![](images/program-execution-thor.png)
 
 1. The client submits the ECL program to ESP
 2. ESP calls Dali to create a workunit entry and embeds the ECL program in the workunit
@@ -163,7 +163,7 @@ ECL programs are executed on Thor by submitting the program code to the ESP serv
 
 ROXIE is an API server used to publish real-time data query services. The service can be invoked using SOAP or REST and can be delivered as JSON or XML.
 
-[[images/program-execution-roxie.png]]
+![](images/program-execution-roxie.png)
 
 
 ROXIE based ECL programs can be deployed to ROXIE in a couple of ways:
@@ -203,5 +203,5 @@ The **Server** process accepts client requests, executes the query service and r
 
 The **Slave** process is mainly responsible for a disk fetch or a single ECL function like a filtered index read. The Slave process receives requests only from a Server process.
 
-[[images/roxie-components.png]]
+![](images/roxie-components.png)
 
