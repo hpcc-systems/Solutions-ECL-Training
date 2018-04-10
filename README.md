@@ -20,9 +20,10 @@ The HPCC Systems introduction is divided into the following two parts:
 ## An introduction to the HPCC Systems architecture
 The goal of the architecture discussion is to provide an introduction of HPCC Systems from the view of a solutions developer, and to answer questions such as - "why HPCC Systems uses a declarative approach to programming?" and "why HPCC Systems helps data scientists who understand the domain?"
 
-[[Go to Architecture Page|Architecture]]
+[Go to Architecture Page](docs/Architecture.md)
+
 
 ## An introduction to ECL the programming language
 The goal of the ECL programming discussion is to introduce the data scientist to the minimum tools needed to solution a real-world problem. You will be amazed how quickly you can get started and start solving problems. 
 
-[[Go to  ECL Programming Page|ECL Introduction]]
+[Go to  ECL Introduction Page](docs/ECL Introduction.md)
