@@ -32,7 +32,7 @@ The goal of the ECL programming discussion is to introduce the data scientist to
 ## An introduction to ECL programming structures
 Understand how to code a program using modular structure that enable you to create clean and reusable code.
 
-[Go to  ECL Introduction Page](docs/ECL_Programming_Structures.md)
+[Go to  ECL Programming Structures](docs/ECL_Programming_Structures.md)
 
 ## Analyze NYC Taxi Trip Data using HPCC Systems and ECL
 You are introduced to an end to end coding example. Topics covered involve data importing, cleaning, enriching, analyzing, predicting using machine learning and exporting data.
