@@ -19,7 +19,7 @@ joinEmployeeAndSalary := JOIN(getEmployee, getSalary,
 OUTPUT(joinEmployeeAndSalary);
 ```
 
-this is the same program that is used in the [[ECL Introduction|ECL Introduction]] page. The same code can be written in a single line:
+this is the same program that is used in the [ECL Introduction](ECL_Introduction.md) page. The same code can be written in a single line:
 
 
 ```ecl
@@ -41,7 +41,7 @@ OUTPUT(
 );
 
 ```
-[[Try the code here|http://play.hpccsystems.com:8010/?Widget=ECLPlaygroundWidget]]
+[Try the code here](http://play.hpccsystems.com:8010/?Widget=ECLPlaygroundWidget)
 
 Notice that the generated data flow graph for both the programs remain exactly the same. Hence, confirming that the ECL programmer codes the "what" and the "how" is decided by the ECL compiler.
 
@@ -275,6 +275,6 @@ One file can reference another by using the **IMPORT** ECL directive. To be able
 
 A real example in VSCode is shown here:
 
-[[images/ecl-directory-import.png]]
+![](images/ecl-directory-import.png)
 
 

@@ -130,7 +130,7 @@ OUTPUT(joinEmployeeAndSalary);
 
 ### Data flow graph generation  
 
-This step creates a representation of the data flow in xml (specifically [XGMML](https://en.wikipedia.org/wiki/XGMML).
+This step creates a representation of the data flow in xml (specifically [XGMML](https://en.wikipedia.org/wiki/XGMML)).
 
 ```xml
     
