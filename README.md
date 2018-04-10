@@ -26,4 +26,4 @@ The goal of the architecture discussion is to provide an introduction of HPCC Sy
 ## An introduction to ECL the programming language
 The goal of the ECL programming discussion is to introduce the data scientist to the minimum tools needed to solution a real-world problem. You will be amazed how quickly you can get started and start solving problems. 
 
-[Go to  ECL Introduction Page](docs/ECL Introduction.md)
+[Go to  ECL Introduction Page](docs/ECL_Introduction.md)
