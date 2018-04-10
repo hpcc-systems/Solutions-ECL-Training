@@ -2,7 +2,7 @@
 
 There are three programming components in the HPCC Systems design. Thor, Roxie and the ECL program. This page is dedicated to understanding ECL program.
 
-A familiarity with [[data flow graphs (diagrams)|https://en.wikipedia.org/wiki/Data_flow_diagram]] and [[declarative programming|https://en.wikipedia.org/wiki/Declarative_programming]] is a prerequisite to understanding ECL programming.
+A familiarity with [data flow graphs (diagrams)](https://en.wikipedia.org/wiki/Data_flow_diagram) and [declarative programming](https://en.wikipedia.org/wiki/Declarative_programming) is a prerequisite to understanding ECL programming.
 
 ## Data flow graphs (diagrams)
 A data flow graph in the context of an ECL program shows the flow of data from one activity to the other. 
@@ -27,12 +27,12 @@ joinEmployeeAndSalary := JOIN(getEmployee, getSalary,
 OUTPUT(joinEmployeeAndSalary);
 ```
 
-[[Try the code here|http://play.hpccsystems.com:8010/?Widget=ECLPlaygroundWidget]]
+[Try the code here](http://play.hpccsystems.com:8010/?Widget=ECLPlaygroundWidget)
 
 
 The data flow graph for the above example is shown below:
 
-[[images/ecl-data-flow.png]]
+![](images/ecl-data-flow.png)
 
 NOTE: Representing a programs flow using a data flow graph shows the ECL compiler optimization and parallelization opportunities. For example, reading the employee and salary datasets can be done in parallel.  
 
@@ -42,7 +42,7 @@ In declarative programming, programmers write logic without describing the contr
 
 The following example shows how you can interpret an ECL program:
 
-[[images/ecl-declarative-example.png]]
+![](images/ecl-declarative-example.png)
 
 Generally, each step in an ECL program represents an activity in the data flow graph. There are a few exceptions which we will cover in the later sections. 
 
@@ -52,7 +52,7 @@ NOTE: Experts with the knowledge of the problem domain are the best data program
 
 The following diagram describes the stages of the ECL compiler
 
-[[images/ecl-compiler-steps.png]]
+![](images/ecl-compiler-steps.png)
 
 ## Parsing 
 
@@ -130,7 +130,7 @@ OUTPUT(joinEmployeeAndSalary);
 
 ### Data flow graph generation  
 
-This step creates a representation of the data flow in xml (specifically [[XGMML|https://en.wikipedia.org/wiki/XGMML]]).
+This step creates a representation of the data flow in xml (specifically [XGMML](https://en.wikipedia.org/wiki/XGMML).
 
 ```xml
     
@@ -211,7 +211,7 @@ OUTPUT(getEmployee2);
 
 The optimized graph is shown below:
 
-[[images/ecl-optimized.png]]
+![](images/ecl-optimized.png)
 
 
 The generated data flow graph has been optimized by the ECL compiler to read the data only once from the disk even though it is coded to read it twice.
@@ -240,7 +240,7 @@ A ROXIE programs execution begins with the ROXIE Server. The ROXIE Server interp
 
 ## Thor ECL program deployment and execution workflow:
 
-[[images/program-execution-thor.png]]
+![](images/program-execution-thor.png)
 
 
 1. The client submits the ECL program to ESP
@@ -256,8 +256,7 @@ A ROXIE programs execution begins with the ROXIE Server. The ROXIE Server interp
 
 ## ROXIE ECL program deployment and execution workflow:
 
-
-[[images/program-execution-roxie.png]]
+![](images/program-execution-roxie.png)
 
 ROXIE based ECL programs can be deployed to ROXIE in a couple of ways:
 
