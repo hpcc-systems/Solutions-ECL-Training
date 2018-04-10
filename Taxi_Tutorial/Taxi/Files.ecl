@@ -125,6 +125,7 @@ EXPORT Files := MODULE
         EXPORT taxi_train_layout := RECORD
             unsigned2 pickup_year;
             unsigned2 pickup_month;
+            unsigned2 pickup_day_of_month;
             unsigned2 pickup_day_of_week;
             unsigned4 cnt;
         END;
@@ -139,6 +140,7 @@ EXPORT Files := MODULE
         EXPORT taxi_model_layout := RECORD
             unsigned2 pickup_year;
             unsigned2 pickup_month;
+            unsigned2 pickup_day_of_month;
             unsigned2 pickup_day_of_week;
             unsigned4 cnt;
         END;

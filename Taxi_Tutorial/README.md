@@ -268,6 +268,141 @@ OUTPUT(cleaned,,Taxi.Files.taxi_clean_file_path, THOR, COMPRESSED, OVERWRITE);
 
 We can do a lot more data cleaning but it is best to keep it simple for now. Execute the code and view the output in ECL Watch.
 
+# 4. Enrich the cleaned data
+
+In order to perform granular time based analysis we would need to add calculated time attributes to the cleaned dataset. For example "day of week", "month of year", "hour of day" etc. would be very useful attributes. 
+
+As we have done in the previous steps, let us create a layout and dataset entry for the enriched file in the Files.ecl
+
+```ecl
+        /*
+            The cleaned file is enriched to add important attributes
+        */
+
+        EXPORT taxi_enrich_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_enriched.thor';
+        
+        EXPORT taxi_enrich_layout := RECORD
+            taxi_clean_layout;
+
+            UNSIGNED4 record_id;
+
+            UNSIGNED2 pickup_minutes_after_midnight;            
+            UNSIGNED2 dropoff_minutes_after_midnight;
+
+            UNSIGNED2 pickup_time_hour;
+            UNSIGNED2 dropoff_time_hour;
+
+            UNSIGNED2 pickup_day_of_week;
+            UNSIGNED2 dropoff_day_of_week;
+            
+            UNSIGNED2 pickup_month_of_year;
+            UNSIGNED2 dropoff_month_of_year;
+
+            UNSIGNED2 pickup_year;
+            UNSIGNED2 dropoff_year;
+
+            UNSIGNED2 pickup_day_of_month;
+            UNSIGNED2 dropoff_day_of_month;
+        END;
+
+        EXPORT taxi_enrich_ds := DATASET(taxi_enrich_file_path, taxi_enrich_layout, THOR);
+```
+Edit the **04_Enrich_Job.ecl** and add the following code
+
+```ecl
+IMPORT STD;
+IMPORT Taxi;
+
+Taxi.Files.taxi_enrich_layout enrich(Taxi.Files.taxi_clean_layout clean,
+     UNSIGNED4 c) := TRANSFORM
+    SELF := clean;
+    SELF.record_id := c; 
+    SELF.pickup_minutes_after_midnight 
+         := Std.Date.Hour(SELF.pickup_time) * 60 + Std.Date.Minute(SELF.pickup_time);
+    SELF.dropoff_minutes_after_midnight 
+         := Std.Date.Hour(SELF.dropoff_time) * 60 + Std.Date.Minute(SELF.dropoff_time);
+    SELF.pickup_time_hour := Std.Date.Hour(SELF.pickup_time);
+    SELF.dropoff_time_hour := Std.Date.Hour(SELF.dropoff_time);
+    SELF.pickup_day_of_week := Std.Date.DayOfWeek(SELF.pickup_date);
+    SELF.dropoff_day_of_week := Std.Date.DayOfWeek(SELF.dropoff_date);
+    SELF.pickup_month_of_year := Std.Date.Month(SELF.pickup_date);
+    SELF.dropoff_month_of_year := Std.Date.Month(SELF.dropoff_date);
+    SELF.pickup_year := Std.Date.Year(SELF.pickup_date);
+    SELF.dropoff_year := Std.Date.Year(SELF.dropoff_date); 
+    SELF.pickup_day_of_month := Std.Date.Day(SELF.pickup_date); 
+    SELF.dropoff_day_of_month := Std.Date.Day(SELF.dropoff_date);
+END; 
+
+enriched := PROJECT(Taxi.Files.taxi_clean_ds, enrich(LEFT, COUNTER));
+
+OUTPUT(enriched,,Taxi.Files.taxi_enrich_file_path, THOR, COMPRESSED, OVERWRITE);
+```
+
+Execute the job and view the workunit results to validate that the files were created successfully. 
+
+
+# 5. Analysis
+
+Analysis can mean many things to many people. For simplicity, we will create a few aggregated queries. We will use one of these queries as the input to create a training set in step 5. Essentially, the analysis step is where a data scientist steps in to explore the possibility of building a model for predictions. 
+
+Modify the Files.ecl to add an analyzed layout. The file stores the daily trip count. 
+
+```ecl
+        /* 
+            Create a simple attribute file that records the counts of trips daily
+        */
+        EXPORT taxi_analyze_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_analyze.thor';
+        
+        EXPORT taxi_analyze_layout := RECORD
+            Std.Date.Date_t    pickup_date;
+            UNSIGNED4 cnt;        
+        END;
+
+        EXPORT taxi_analyze_ds := DATASET(taxi_analyze_file_path, taxi_analyze_layout, THOR); 
+```
+
+Edit the 05_Analyze_Job.ecl
+
+```ecl
+        IMPORT STD;
+        IMPORT Taxi;
+
+        //count of pickups by a weekday
+
+        cnt_by_weekday_ds:= TABLE(Taxi.Files.taxi_enrich_ds, 
+                    {pickup_day_of_week, UNSIGNED4 cnt := COUNT(GROUP)}, 
+                    pickup_day_of_week);
+
+        OUTPUT(cnt_by_weekday_ds,,NAMED('count_by_weekday'));
+
+        //**********************DIY**************************
+
+        //What is the avg volume of trips between 7 AM to 10 AM for each week day?
+
+        //What hours of the day do you see the maximimum trips?
+
+        //Daily trips grouped by hour
+
+        //***************************************************
+
+        //count of pickups daily
+        cnt_per_day_ds := TABLE(Taxi.Files.taxi_enrich_ds, 
+                    {pickup_date, UNSIGNED4 cnt := COUNT(GROUP)}, 
+                    pickup_date);
+
+
+        OUTPUT(cnt_per_day_ds,,Taxi.Files.taxi_analyze_file_path, 
+            THOR, COMPRESSED, OVERWRITE);
+
+```
+
+# 6. Create training data
+
+Given "pickup day of week", month and year
+
+
+
+
 
 
 
