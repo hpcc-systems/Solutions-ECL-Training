@@ -1,7 +1,7 @@
 # Welcome to an Introduction to HPCC Systems
-HPCC Systems is the Open Source platform developed by LexisNexis Risk Solutions to solve Risk analysis problems around people and businesses. 
+HPCC Systems is the Open Source Data Lake technology developed by LexisNexis Risk Solutions to solve Big Data problems for the LexiNexis business.
 
-HPCC Systems is designed to process petabyte of data and integrate data from thousands of sources. 
+HPCC Systems is designed to host and process petabyte of data and integrate data from thousands of sources. 
 
 One important distinction between other similar tools and HPCC Systems is that the innovation and quality of HPCC Systems has a direct impact to the success of LexisNexis. Therefore, HPCC Systems is rigorously tested and supported by experts in data analysis.  
 
