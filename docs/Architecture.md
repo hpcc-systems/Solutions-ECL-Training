@@ -1,11 +1,17 @@
 # Summary
 HPCC Systems is designed to:
 
-1. Clean data
-2. Perform data integration
-3. Perform data analysis
-4. Store and process Big Data
-5. Perform and scale reliably
+1. Perform data integration
+2. Clean data
+3. Transform and Enrich data
+4. Business Intelligence
+5. Machine Learning
+6. Data Lake architecture
+7. Perform and scale reliably
+
+## Perform data integration
+
+Data integration is the process of acquiring and linking related data. Cars owned by a person, relatives of a person and sales people working on a single account, are all examples of a data integration process. A complex data integration process integrates 1000s of sources of data. 
 
 ## Clean data
 
@@ -43,11 +49,8 @@ The following example shows many versions of the data help accurately identify a
 
 Creating a uniform shape of the data is very important to the downstream analytical processes. Constant changes to the shape (structure) of the data make it hard to program the analytic processes that depend on the data. 
 
-## Perform data integration
 
-Data integration is the process of linking related data. Cars owned by a person, relatives of a person and sales people working on a single account, are all examples of a data integration process. A complex data integration process integrates 1000s of sources of data. 
-
-## Perform data analysis
+## Business Intelligence analysis
 
 Assuming that data has been cleaned, analyzing and providing insight from the data will be the next step.
 
@@ -56,13 +59,22 @@ NOTE: We have a strict distinction between a clean step and a analysis step. Fro
 The analysis process identifies interesting attributes and entity relations. Attributes are typically aggregation values (count, sum etc.) that can be valuable in building predictive models and end user reporting. 
 ![](images/analysis-example.png)
 
-## Store and process Big Data
+## Data Lake Architecture
 
 The biggest mistake in a traditional data warehouse is storing data that is deemed significant. Any other data points are dropped. In addition, because of data storage limitations, exactly one version of the data is stored. Therefore, producing a very limited data learning environment.
 
 To be successful at data science, the data scientist has to be given all the data to work with. No data is insignificant. 
 
-## 4. Perform and scale reliably
+To account for Big Data, HPCC Systems is designed to function as Data Lake. Some of the high level characteristics of the HPCC Systems Data Lake:
+
+* Schema on read capability.
+* File metadata management. Tracks all the data in the Data Lake.
+* Scale to any amount of data.
+* Separate compute from storage.  HPCC Systems can scale to many compute clusters.
+* High performance by computing close to the data 
+* Batch, Streaming and Real-time workloads
+
+## Perform and scale reliably
 
 Hopefully, a case has been made for a Big Data processing system. Learning from historic data, performing sophisticated analysis and keeping all the data around needs significant processing power, reliability and ultimately scalability.  
 
