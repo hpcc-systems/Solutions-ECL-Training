@@ -12,7 +12,7 @@
             "workspace": "${workspaceRoot}",
             "program": "${file}",
             "protocol": "http",
-            "serverAddress": "10.173.147.1",
+            "serverAddress": "play.hpccsystems.com",
             "port": 8010,
             "rejectUnauthorized": false,
             "targetCluster": "thor",
