@@ -7,7 +7,8 @@ EXPORT Files := MODULE
             Location of raw file on the landing zone
         */
 
-        EXPORT taxi_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_2015.csv';
+        // EXPORT taxi_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_2015.csv';
+        EXPORT taxi_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_2015-01_10000.csv';
 
         /*
             Raw file layout and dataset after it is imported into Thor
