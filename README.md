@@ -34,7 +34,14 @@ Understand how to code a program using modular structure that enable you to crea
 
 [Go to  ECL Programming Structures](docs/ECL_Programming_Structures.md)
 
+## An introduction to ECL for Spark Programmers
+How can Spark programmers get them started quickly without having to learn ECL from scratch? 
+
+[Go to  Tutorial](docs/ECL_For_Spark_Coders.md)
+
 ## Analyze NYC Taxi Trip Data using HPCC Systems and ECL
 You are introduced to an end to end coding example. Topics covered involve data importing, cleaning, enriching, analyzing, predicting using machine learning and exporting data.
 
 [Go to  Taxi Tutorial](Taxi_Tutorial/README.md)
+
+
