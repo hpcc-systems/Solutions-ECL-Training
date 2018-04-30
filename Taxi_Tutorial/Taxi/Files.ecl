@@ -2,6 +2,9 @@ IMPORT STD;
 
 EXPORT Files := MODULE
         EXPORT file_scope := '~training-samples';
+        EXPORT project_scope := 'taxi';
+        EXPORT in_files_scope := 'in';
+        EXPORT out_files_scope := 'out';
 
         /*
             Location of raw file on the landing zone
@@ -14,7 +17,7 @@ EXPORT Files := MODULE
             Raw file layout and dataset after it is imported into Thor
         */
 
-        EXPORT taxi_raw_file_path := file_scope + '::taxi::in::yellow_tripdata_2015.csv';
+        EXPORT taxi_raw_file_path := file_scope + '::' + project_scope + '::' + in_files_scope + '::yellow_tripdata.csv';
 
         EXPORT taxi_raw_layout := RECORD
             STRING  vendor_id;
@@ -41,11 +44,21 @@ EXPORT Files := MODULE
         EXPORT taxi_raw_ds := DATASET(taxi_raw_file_path, taxi_raw_layout, CSV(HEADING(1)));
 
         /*
+         
+        EXPORT Data Profile report on the Raw File. Use the report output to understand your data 
+        and validate the assumptions you would have made.
+
+        */
+
+        EXPORT taxi_data_patterns_raw_file_path := file_scope + '::' + project_scope + '::' + out_files_scope +  '::yellow_tripdata_raw_data_patterns.thor';
+
+
+        /*
             Cleaned file layout and dataset. The cleaned file is created after cleaning the 
             raw file.
         */
     
-        EXPORT taxi_clean_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_clean.thor';
+        EXPORT taxi_clean_file_path := file_scope + '::' + project_scope + '::' + out_files_scope + '::yellow_tripdata_clean.thor';
         
         EXPORT taxi_clean_layout := RECORD
             UNSIGNED1   vendor_id;
@@ -77,7 +90,7 @@ EXPORT Files := MODULE
             The cleaned file is enriched to add important attributes
         */
 
-        EXPORT taxi_enrich_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_enriched.thor';
+        EXPORT taxi_enrich_file_path := file_scope + '::' + project_scope + '::' + out_files_scope +  '::yellow_tripdata_enriched.thor';
         
         EXPORT taxi_enrich_layout := RECORD
             taxi_clean_layout;
@@ -108,7 +121,7 @@ EXPORT Files := MODULE
         /* 
             Create a simple attribute file that records the counts of trips daily
         */
-        EXPORT taxi_analyze_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_analyze.thor';
+        EXPORT taxi_analyze_file_path := file_scope + '::' + project_scope + '::' + out_files_scope +  '::yellow_tripdata_analyze.thor';
         
         EXPORT taxi_analyze_layout := RECORD
             Std.Date.Date_t    pickup_date;
@@ -121,7 +134,7 @@ EXPORT Files := MODULE
             Create a training file to train a GLM for predecting trip counts for a future date
         */
 
-        EXPORT taxi_train_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_train.thor';
+        EXPORT taxi_train_file_path := file_scope + '::' + project_scope + '::' + out_files_scope +  '::yellow_tripdata_train.thor';
 
         EXPORT taxi_train_layout := RECORD
             unsigned2 pickup_year;
@@ -149,5 +162,5 @@ EXPORT Files := MODULE
         */ 
 
         EXPORT taxi_analysis_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_analysis.csv';  
-        EXPORT taxi_analyze_csv_file_path := file_scope + '::taxi::out::yellow_tripdata_analyze.csv';
+        EXPORT taxi_analyze_csv_file_path := file_scope + '::' + project_scope + '::' + out_files_scope +  '::yellow_tripdata_analyze.csv';
 END;

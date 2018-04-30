@@ -7,6 +7,11 @@ cnt_by_weekday_ds:= TABLE(Taxi.Files.taxi_enrich_ds,
              {pickup_day_of_week, UNSIGNED4 cnt := COUNT(GROUP)}, 
              pickup_day_of_week);
 
+//This is equivalent to the following in SQL:            
+//SELECT  pickup_day_of_week, cnt as COUNT 
+//    FROM Taxi.Files.taxi_enrich_ds 
+//    GROUP BY pickup_day_of_week            
+
 OUTPUT(cnt_by_weekday_ds,,NAMED('count_by_weekday'));
 
 //***************Try some of this********************
