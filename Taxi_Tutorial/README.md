@@ -570,7 +570,7 @@ Edit the 08_Train_Data_Job.ecl to add:
 
 The train code extracts the information from the analyzed dataset we had created in the previous step and creates the independent variables *pickup_year, pickup_month, pickup_day_of_month and pickup_day_of_week* in addition to keeping the *cnt* dependent variable. Execute the code and test the output.
 
-## 09. Create the GLB model using the training data
+## 09. Create the GLM (General Linear Model) using the training data
 
 Perquisites: The ML_Core and GLB bundles have to preinstalled in your development environment
 
