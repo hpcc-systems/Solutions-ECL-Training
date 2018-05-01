@@ -115,7 +115,7 @@ EXPORT file_scope := '~training-samples';
 NOTE: Substitute {Your Scope Prefix} with a prefix like "~achala_training". If you do not do this, you might override somebody else's files.
 A 100,000 record CSV data (sampled randomly across a 1.6 billion recordset) is available on the HPCC Systems playground [landing zone](http://play.hpccsystems.com:8010/?Widget=ECLPlaygroundWidget)
 
-HPCC System services are based on a micro services architecture. For importing a file the **FileSpray** service is used. Since the file **yellow_tripdata_2015.csv** is available on the landing zone server and is mapped to the directory /var/lib/HPCCSystems/mydropzone. To import the data, we can write an ECL program with the following action:
+HPCC System services are based on a micro services architecture. For importing a file the **FileSpray** service is used. Since the file **yellow_tripdata_2015-01_10000.csv** is available on the landing zone server and is mapped to the directory /var/lib/HPCCSystems/mydropzone. To import the data, we can write an ECL program with the following action:
 
 Edit the Data_Import_Job.ecl and add the following code:
 
@@ -194,7 +194,7 @@ EXPORT taxi_raw_ds := DATASET(taxi_raw_file_path, taxi_raw_layout, CSV(HEADING(1
     
 ```
 
-Now, modify the **Data_Import_Validate_Job.ecl** to add an OUTPUT step to visually validate the progress using ECL Watch
+Now, modify the **02_Data_Import_Validate_Job.ecl** to add an OUTPUT step to visually validate the progress using ECL Watch
 
 ```ecl
 IMPORT STD;
@@ -303,7 +303,7 @@ Edit the Files.ecl and add:
 
 ```
 
-Edit the **Clean_Job.ecl** and add the following code
+Edit the **04_Clean_Job.ecl** and add the following code
 
 ```ecl
 IMPORT STD;
@@ -341,7 +341,7 @@ OUTPUT(cleaned,,Taxi.Files.taxi_clean_file_path, THOR, COMPRESSED, OVERWRITE);
 
 We can do a lot more data cleaning but it is best to keep it simple for now. Execute the code and view the output in ECL Watch.
 
-# 5. Enrich the cleaned data
+## 05. Enrich the cleaned data
 
 In order to perform granular time based analysis we would need to add calculated time attributes to the cleaned dataset. For example "day of week", "month of year", "hour of day" etc. would be very useful attributes. 
 
@@ -380,7 +380,7 @@ As we have done in the previous steps, let us create a layout and dataset entry 
 
         EXPORT taxi_enrich_ds := DATASET(taxi_enrich_file_path, taxi_enrich_layout, THOR);
 ```
-Edit the **04_Enrich_Job.ecl** and add the following code
+Edit the **05_Enrich_Job.ecl** and add the following code
 
 ```ecl
 IMPORT STD;
@@ -414,7 +414,7 @@ OUTPUT(enriched,,Taxi.Files.taxi_enrich_file_path, THOR, COMPRESSED, OVERWRITE);
 Execute the job and view the workunit results to validate that the files were created successfully. 
 
 
-# 5. Analysis
+## 06. Analysis
 
 Analysis can mean many things to many people. For simplicity, we will create a few aggregated queries. We will use one of these queries as the input to create a training set in step 5. Essentially, the analysis step is where a data scientist steps in to explore the possibility of building a model for predictions. 
 
@@ -434,7 +434,7 @@ Modify the Files.ecl to add an analyzed layout. The file stores the daily trip c
         EXPORT taxi_analyze_ds := DATASET(taxi_analyze_file_path, taxi_analyze_layout, THOR); 
 ```
 
-Edit the 05_Analyze_Job.ecl
+Edit the 06_Analyze_Job.ecl
 
 ```ecl
         IMPORT STD;
@@ -468,8 +468,63 @@ Edit the 05_Analyze_Job.ecl
             THOR, COMPRESSED, OVERWRITE);
 
 ```
+## 07. Visualize analyzed data
 
-# 6. Create training data
+Visualization provides the needed abstraction to convey the output of analysis task visually. You can do this in ECL by using the ECL Visualizer bundle.
+
+NOTE: To perform this step, you will need the Visualizer bundle. Use the ecl command line tool to install this bundle globally:
+
+```
+ecl bundle install https://github.com/hpcc-systems/Visualizer.git
+```
+
+and then modify the 07_A_Visualize_Job.ecl to add
+
+```ecl
+IMPORT Taxi;
+IMPORT Visualizer;
+
+cnt_by_weekday_ds:= TABLE(Taxi.Files.taxi_enrich_ds, 
+             {pickup_day_of_week, UNSIGNED4 cnt := COUNT(GROUP)}, 
+             pickup_day_of_week);
+
+
+OUTPUT(cnt_by_weekday_ds, NAMED('count_by_weekday'));
+Visualizer.TwoD.pie('count_by_week_day_pie',, 'count_by_weekday');
+``` 
+
+Execute the job, open the ECL workunit output in ECL Watch and navigate to the Resource tab:
+
+![](images/a_visualization.jpg)
+
+This is fairly boring chart. What if we wanted to see the weekdays instead of the numbers:
+
+modify the 07_B_Visualize_Job.ecl to add
+
+```ecl
+IMPORT Taxi;
+IMPORT Visualizer;
+
+cnt_by_weekday_ds:= TABLE(Taxi.Files.taxi_enrich_ds, 
+             {pickup_day_of_week, UNSIGNED4 cnt := COUNT(GROUP)}, 
+             pickup_day_of_week);
+
+
+cnt_by_weekday_alpha_ds := PROJECT(cnt_by_weekday_ds, TRANSFORM({STRING weekday, UNSIGNED4 cnt}, 
+                                           SELF.weekday := CASE(LEFT.pickup_day_of_week, 1 => 'Sun', 2 => 'Mon', 3 => 'Tue', 4 => 'Wed', 5 => 'Thur', 6 => 'Fri', 'Sat'); 
+                                           SELF.cnt := LEFT.cnt));
+
+OUTPUT(cnt_by_weekday_alpha_ds, NAMED('count_by_weekday'));
+Visualizer.TwoD.pie('count_by_week_day_pie',, 'count_by_weekday');
+Visualizer.MultiD.Bar('count_by_week_day_bar',, 'count_by_weekday');
+```
+
+Execute the job and you should now see:
+
+![](images/b_visualization.jpg)
+
+
+## 08. Create training data
 
 Given "pickup day of week", "pickup day of month", "month" and "year", can we predict future trips?  We can certainly try. We will use the Generalized Linear Model (GLM) function in the new ECL ML library in the next step. But first, let us create a training set with the desired independent variables and  dependent variable.
 
@@ -494,7 +549,7 @@ Modify the Files.ecl to add:
 
 ``` 
 
-Edit the 06_Train_Data_Job.ecl to add:
+Edit the 08_Train_Data_Job.ecl to add:
 
 ```ecl
         IMPORT STD;
@@ -515,13 +570,13 @@ Edit the 06_Train_Data_Job.ecl to add:
 
 The train code extracts the information from the analyzed dataset we had created in the previous step and creates the independent variables *pickup_year, pickup_month, pickup_day_of_month and pickup_day_of_week* in addition to keeping the *cnt* dependent variable. Execute the code and test the output.
 
-# 7. Create the GLB model using the training data
+## 09. Create the GLB model using the training data
 
 Perquisites: The ML_Core and GLB bundles have to preinstalled in your development environment
 
 To install a bundle, execute "ecl bundle install <bundlefile>.ecl --remote"
 
-Now, edit the 07_GLM_Model_Job.ecl
+Now, edit the 09_GLM_Model_Job.ecl
 
 ```ecl
 IMPORT Taxi;
@@ -549,7 +604,7 @@ OUTPUT(PoissonDeviance, NAMED('Deviance'));
 Execute the code and view the outputs. The most interesting output is the Deviance. You will straightaway notice that the predictions are not very accurate (overfit). This is OK for our experiement because our training set was limited (a years worth is not much).
 
 
-# 8. Data export
+## 10. Data export
 
 If you have interesting work to share with others . User the ECL DESPRAY activity. This will export the data from HPCC back to the landing zone. 
 
@@ -564,7 +619,7 @@ Add to Files.ecl
         EXPORT taxi_analyze_csv_file_path := file_scope + '::taxi::out::yellow_tripdata_analyze.csv';
 ```
 
-Add to 08_Data_Export.ecl
+Add to 10_Data_Export.ecl
 
 ```ecl
         IMPORT STD;
