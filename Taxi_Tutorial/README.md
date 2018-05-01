@@ -252,7 +252,7 @@ OUTPUT(rawTaxiProfileResults,,
 
 The content of the output file as viewed in ECL Watch should look like:
 
-![](images/profile_report.png)
+![](images/profile_report.jpg)
 
 
 ## 04. Clean the raw data and convert it to a standard form
