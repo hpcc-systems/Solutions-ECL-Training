@@ -11,5 +11,5 @@ cnt_by_weekday_alpha_ds := PROJECT(cnt_by_weekday_ds, TRANSFORM({STRING weekday,
                                            SELF.cnt := LEFT.cnt));
 
 OUTPUT(cnt_by_weekday_alpha_ds, NAMED('count_by_weekday'));
-Visualizer.TwoD.pie('count by week day pie',, 'count_by_weekday');
-Visualizer.MultiD.Bar('count by week day bar',, 'count_by_weekday');
+Visualizer.TwoD.pie('count_by_week_day_pie',, 'count_by_weekday');
+Visualizer.MultiD.Bar('count_by_week_day_bar',, 'count_by_weekday');

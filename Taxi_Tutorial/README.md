@@ -1,22 +1,30 @@
 # Summary
 
-Building an ECL application involves 6 steps:
+Building an ECL application involves 3 steps:
 
-1. Defining the ECL application project structure
-2. Understanding the cluster setup
-3. Importing the data into Thor
-4. Clean the raw data 
-5. Enrich the data
-6. Creating an attribute file
-7. Create a training dataset 
-8. Build the General Linear Model (GLM) to predict trip volume
-9. Export useful data for external consumption
+1. Understanding the cluster setup
+2. Defining the ECL application project structure 
+3. Programming
+    1. Importing the data into Thor
+    2. Validating the imported data
+    3. Profile and Learn about the raw data 
+    4. Clean the raw data 
+    5. Enrich the data
+    6. Analyze
+    7. Visualize
+    8. Create a training dataset 
+    9. Build the General Linear Model (GLM) to predict trip volume
+    10.Export useful data for external consumption
 
 To understand these steps, let us consider a concrete example. We will start with Todd Schneider's excellent project at https://github.com/toddwschneider/nyc-taxi-data. The data contains 1.3 billion taxi and Uber trips originating in New York City. 
 
 The first step in building an ECL application is to build a simplistic approach to quickly consume the data and to complete the first two steps above. To accomplish this, it is best to consider a smaller subset of the Taxi dataset. It will make it easier and faster to accomplish the tasks.
 
-# 1. Defining the ECL application project structure
+# 1. Understanding the cluster setup
+
+One AWS Instance running Thor, ROXIE, Middleware Services and the Landing Zone. For Thor, we have setup four slave processes. ROXIE is setup as a single process.
+
+# 2. Defining the ECL application project structure
 
 We will VS Code with the ECL plugin as our IDE for this project.
 
@@ -36,62 +44,72 @@ Contains the code to import data from the landing zone into Thor
 
 Contains the code to validate a data import
 
-**03_Clean_Job.ecl**
+**03_Data_Patterns_Job.ecl**
+
+Executes the Data Profile report on the raw data to understand the fill rates, cardinality, patterns of characters, optimal field definitions etc.
+
+**04_Clean_Job.ecl**
 
 Job that cleans and converts raw data to a cleaned version
 
-**04_Enrich_Job.ecl**
+**05_Enrich_Job.ecl**
 
 Adds additional attributes to the cleaned data to make the dataset more valuable to the analysis process
 
-**05_Analyze_Job.ecl**
+**06_Analyze_Job.ecl**
 
 Perform analysis on the enriched data. trip volumes etc. Also build an attribute dataset that can be used for creating a training dataset to create a machine learning GLM (General Linear Model) to predict trip volumes provided a date in the future. A very simple use case to get you started on using ML techniques within HPCC Systems.
 
-**06_Train_Data_Job.ecl**
+**07_[]_Visualize_Job.ecl**
+
+Quickly visualize analyzed data using the ECL Visualizer bundle
+
+**08_Train_Data_Job.ecl**
 
 Create the training data set containing the pickup_year, pickup_month, pickup_day_of_week and count of trips
 
-**07_GLM_Model_Job.ecl**
+**09_GLM_Model_Job.ecl**
 
 Builds the Generalized Linear Model by using the training data of pickup_year, pickup_month, pickup_day_of_week and count of trips
 
-**08_Data_Export_Job.ecl**
+**10_Data_Export_Job.ecl**
 
 Contains the code to export the data from Thor into the landing zone
 
-Edit the Files.ecl to add:
+# 3. Programming
+
+Write ECL code to import raw data, profile, clean, enrich, analyze, visualize, perform machine learning and export data
+
+## 01. Importing the data into Thor
+
+Edit the Files.ecl to add the location of the raw file located on the landing zone:
 
 ```ecl
 IMPORT STD;
 
 EXPORT Files := MODULE
-        EXPORT file_scope := '{Your Scope Prefix};
+EXPORT file_scope := '~training-samples';
+        EXPORT project_scope := 'taxi';
+        EXPORT in_files_scope := 'in';
+        EXPORT out_files_scope := 'out';
 
         /*
             Location of raw file on the landing zone
         */
 
-        // EXPORT taxi_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_2015.csv';
         EXPORT taxi_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_2015-01_10000.csv';
 
         /*
             Raw file layout and dataset after it is imported into Thor
         */
 
-        EXPORT taxi_raw_file_path := file_scope + '::taxi::in::yellow_tripdata_2015.csv';
+        EXPORT taxi_raw_file_path := file_scope + '::' + project_scope +
+                       '::' + in_files_scope + '::yellow_tripdata.csv';
  END;       
 
 ```
 
 NOTE: Substitute {Your Scope Prefix} with a prefix like "~achala_training". If you do not do this, you might override somebody else's files.
-
-# 2. Understanding the cluster setup
-
-One AWS Instance running Thor, ROXIE, Middleware Services and the Landing Zone. For Thor, we have setup four slave processes. ROXIE is setup as a single process.
-
-# 3. Importing the data into Thor
-
 A 100,000 record CSV data (sampled randomly across a 1.6 billion recordset) is available on the HPCC Systems playground [landing zone](http://play.hpccsystems.com:8010/?Widget=ECLPlaygroundWidget)
 
 HPCC System services are based on a micro services architecture. For importing a file the **FileSpray** service is used. Since the file **yellow_tripdata_2015.csv** is available on the landing zone server and is mapped to the directory /var/lib/HPCCSystems/mydropzone. To import the data, we can write an ECL program with the following action:
@@ -119,6 +137,8 @@ Execute the code using the VS Code debugger and view the results in the ECL Watc
 We could import the file using an user interface, but we want to demonstrate the power of the HPCC Systems micro services. You can invoke these services from any programming language by calling the services end point. In our example, we demonstrate an ECL program invoking the service.
 
 If the program executes correctly, you will see a complete status. Alternatively, if there was an error, you will see an error message.
+
+## 02. Validate if the data has been imported correctly
 
 You can also verify that the file has been correctly sprayed by querying the logical file attributes:
 
@@ -185,8 +205,57 @@ file := Taxi.Files.taxi_raw_file_path;
 OUTPUT(Taxi.Files.taxi_raw_ds,,NAMED('Raw_Taxi_Data'));
 ```
 
+## 03. Profile the raw data to validate assumptions
 
-# 4. Clean the raw data and convert it to a standard form
+NOTE: To perform this step, you will need the Data Patterns bundle. Use the ecl command line tool to install this bundle globally:
+
+```
+ecl bundle install https://github.com/dcamper/DataPatterns.git
+
+```
+
+The profile step is by far the most important step as it helps to validate (or invalidate) assumptions of the incoming raw data. You can easily execute a profile report by using the following code:
+
+Add to Files.ecl
+
+```ecl
+        /*
+         
+        EXPORT Data Profile report on the Raw File. Use the report output to understand your data 
+        and validate the assumptions you would have made.
+
+        */
+
+        EXPORT taxi_data_patterns_raw_file_path := file_scope + '::' + 
+             project_scope + '::' + out_files_scope +  '::yellow_tripdata_raw_data_patterns.thor';
+
+```
+
+Modify 03_Data_Patterns_Job.ecl and replace with:
+
+```ecl
+IMPORT Taxi;
+IMPORT DataPatterns;
+
+
+IMPORT Taxi;
+IMPORT DataPatterns;
+
+rawTaxiData := Taxi.Files.taxi_raw_ds;
+OUTPUT(rawTaxiData, NAMED('rawTaxiDataSample'));
+
+rawTaxiProfileResults := DataPatterns.Profile(rawTaxiData, 
+             features := 'fill_rate,cardinality,best_ecl_types,lengths,patterns,modes');
+OUTPUT(rawTaxiProfileResults,, 
+     Taxi.Files.taxi_data_patterns_raw_file_path, OVERWRITE);
+```
+
+The content of the output file as viewed in ECL Watch should look like:
+
+![](images/profile_report.png)
+
+
+## 04. Clean the raw data and convert it to a standard form
 
 So far, we have imported a file into Thor, read it as a Dataset and performed some basic validation. The next step is to clean and optimize the data. In this step, we will perform two operations:
 
@@ -269,7 +338,7 @@ OUTPUT(cleaned,,Taxi.Files.taxi_clean_file_path, THOR, COMPRESSED, OVERWRITE);
 
 We can do a lot more data cleaning but it is best to keep it simple for now. Execute the code and view the output in ECL Watch.
 
-# 4. Enrich the cleaned data
+# 5. Enrich the cleaned data
 
 In order to perform granular time based analysis we would need to add calculated time attributes to the cleaned dataset. For example "day of week", "month of year", "hour of day" etc. would be very useful attributes. 
 

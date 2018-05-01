@@ -10,7 +10,6 @@ EXPORT Files := MODULE
             Location of raw file on the landing zone
         */
 
-        // EXPORT taxi_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_2015.csv';
         EXPORT taxi_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_2015-01_10000.csv';
 
         /*
@@ -50,7 +49,8 @@ EXPORT Files := MODULE
 
         */
 
-        EXPORT taxi_data_patterns_raw_file_path := file_scope + '::' + project_scope + '::' + out_files_scope +  '::yellow_tripdata_raw_data_patterns.thor';
+        EXPORT taxi_data_patterns_raw_file_path := file_scope + '::' + 
+             project_scope + '::' + out_files_scope +  '::yellow_tripdata_raw_data_patterns.thor';
 
 
         /*

@@ -7,4 +7,4 @@ cnt_by_weekday_ds:= TABLE(Taxi.Files.taxi_enrich_ds,
 
 
 OUTPUT(cnt_by_weekday_ds, NAMED('count_by_weekday'));
-Visualizer.TwoD.pie('count by week day pie',, 'count_by_weekday');
+Visualizer.TwoD.pie('count_by_week_day_pie',, 'count_by_weekday');

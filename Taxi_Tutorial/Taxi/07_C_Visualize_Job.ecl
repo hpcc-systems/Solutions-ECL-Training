@@ -32,5 +32,5 @@ patterns_ds := DATASET(Taxi.Files.taxi_data_patterns_raw_file_path, patterns_lay
 OUTPUT(patterns_ds, {attribute, cardinality}, NAMED('cardinality'));
 Visualizer.MultiD.Bar('cardinality',, 'cardinality');
 OUTPUT(patterns_ds, {attribute, fill_rate}, NAMED('fill_rate'));
-Visualizer.MultiD.Bar('fill rate',, 'fill_rate');
+Visualizer.MultiD.Bar('fill_rate',, 'fill_rate');
 
