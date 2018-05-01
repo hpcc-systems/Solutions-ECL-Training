@@ -5,15 +5,15 @@ Building an ECL application involves 3 steps:
 1. Understanding the cluster setup
 2. Defining the ECL application project structure 
 3. Programming
-    1. Importing the data into Thor
-    2. Validating the imported data
-    3. Profile and Learn about the raw data 
-    4. Clean the raw data 
-    5. Enrich the data
-    6. Analyze
-    7. Visualize
-    8. Create a training dataset 
-    9. Build the General Linear Model (GLM) to predict trip volume
+    01. Importing the data into Thor
+    02. Validating the imported data
+    03. Profile and Learn about the raw data 
+    04. Clean the raw data 
+    05. Enrich the data
+    06. Analyze
+    07. Visualize
+    08. Create a training dataset 
+    09. Build the General Linear Model (GLM) to predict trip volume
     10.Export useful data for external consumption
 
 To understand these steps, let us consider a concrete example. We will start with Todd Schneider's excellent project at https://github.com/toddwschneider/nyc-taxi-data. The data contains 1.3 billion taxi and Uber trips originating in New York City. 
@@ -165,29 +165,29 @@ One of the key features of ECL and HPCC Systems, is the concept of dynamic schem
 Add the layout for the raw input file and then bind it to a dataset. When the taxi_raw_ds is read at runtime, the defined schema (taxi_raw_layout) is bound to it. This is the schema on read characteristic. 
 
 ```ecl
-    EXPORT taxi_raw_layout := RECORD
-        STRING  vendor_id;
-        STRING  tpep_pickup_datetime;
-        STRING  tpep_dropoff_datetime;
-        STRING  passenger_count;
-        STRING  trip_distance;
-        STRING  pickup_longitude;
-        STRING  pickup_latitude;
-        STRING  rate_code_id;
-        STRING  store_and_fwd_flag;
-        STRING  dropoff_longitude;
-        STRING  dropoff_latitude;
-        STRING  payment_type;
-        STRING  fare_amount;
-        STRING  extra;
-        STRING  mta_tax;
-        STRING  tip_amount;
-        STRING  tolls_amount;
-        STRING  improvement_surcharge;
-        STRING  total_amount;
-    END;
+EXPORT taxi_raw_layout := RECORD
+    STRING  vendor_id;
+    STRING  tpep_pickup_datetime;
+    STRING  tpep_dropoff_datetime;
+    STRING  passenger_count;
+    STRING  trip_distance;
+    STRING  pickup_longitude;
+    STRING  pickup_latitude;
+    STRING  rate_code_id;
+    STRING  store_and_fwd_flag;
+    STRING  dropoff_longitude;
+    STRING  dropoff_latitude;
+    STRING  payment_type;
+    STRING  fare_amount;
+    STRING  extra;
+    STRING  mta_tax;
+    STRING  tip_amount;
+    STRING  tolls_amount;
+    STRING  improvement_surcharge;
+    STRING  total_amount;
+END;
 
-    EXPORT taxi_raw_ds := DATASET(taxi_raw_file_path, taxi_raw_layout, CSV(HEADING(1)));
+EXPORT taxi_raw_ds := DATASET(taxi_raw_file_path, taxi_raw_layout, CSV(HEADING(1)));
     
 ```
 
