@@ -5,16 +5,19 @@ Building an ECL application involves 3 steps:
 1. Understanding the cluster setup
 2. Defining the ECL application project structure 
 3. Programming
-    01. Importing the data into Thor
-    02. Validating the imported data
-    03. Profile and Learn about the raw data 
-    04. Clean the raw data 
-    05. Enrich the data
-    06. Analyze
-    07. Visualize
-    08. Create a training dataset 
-    09. Build the General Linear Model (GLM) to predict trip volume
-    10.Export useful data for external consumption
+    
+The programming tasks can be further divided into:
+
+1. Importing the data into Thor
+2. Validating the imported data
+3. Profile and Learn about the raw data 
+4. Clean the raw data 
+5. Enrich the data
+6. Analyze
+7. Visualize
+8. Create a training dataset 
+9. Build the General Linear Model (GLM) to predict trip volume
+10. Export useful data for external consumption
 
 To understand these steps, let us consider a concrete example. We will start with Todd Schneider's excellent project at https://github.com/toddwschneider/nyc-taxi-data. The data contains 1.3 billion taxi and Uber trips originating in New York City. 
 
@@ -219,15 +222,15 @@ The profile step is by far the most important step as it helps to validate (or i
 Add to Files.ecl
 
 ```ecl
-        /*
-         
-        EXPORT Data Profile report on the Raw File. Use the report output to understand your data 
-        and validate the assumptions you would have made.
+/*
+    
+    EXPORT Data Profile report on the Raw File. Use the report output to understand your data 
+    and validate the assumptions you would have made.
 
-        */
+*/
 
-        EXPORT taxi_data_patterns_raw_file_path := file_scope + '::' + 
-             project_scope + '::' + out_files_scope +  '::yellow_tripdata_raw_data_patterns.thor';
+EXPORT taxi_data_patterns_raw_file_path := file_scope + '::' + 
+        project_scope + '::' + out_files_scope +  '::yellow_tripdata_raw_data_patterns.thor';
 
 ```
 
