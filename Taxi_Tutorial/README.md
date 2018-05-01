@@ -497,7 +497,7 @@ Execute the job, open the ECL workunit output in ECL Watch and navigate to the R
 
 ![](images/a_visualization.jpg)
 
-This is fairly boring chart. What if we wanted to see the weekdays instead of the numbers:
+This is a fairly boring chart. What if we wanted to see the weekdays instead of the numbers:
 
 modify the 07_B_Visualize_Job.ecl to add
 
@@ -601,7 +601,7 @@ OUTPUT(PoissonDeviance, NAMED('Deviance'));
 ```
 
 
-Execute the code and view the outputs. The most interesting output is the Deviance. You will straightaway notice that the predictions are not very accurate (overfit). This is OK for our experiement because our training set was limited (a years worth is not much).
+Execute the code and view the outputs. The most interesting output is the Deviance. You will straightaway notice that the predictions are not very accurate (overfit). This is OK for our experiment because our training set was limited (a years worth is not much).
 
 
 ## 10. Data export
