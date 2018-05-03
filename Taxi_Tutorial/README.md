@@ -3,7 +3,7 @@
 Building an ECL application involves 3 steps:
 
 1. Understanding the cluster setup
-2. Defining the ECL application project structure 
+2. Defining the ECL application project structure and workflow 
 3. Programming
     
 The programming tasks can be further divided into:
@@ -27,7 +27,9 @@ The first step in building an ECL application is to build a simplistic approach 
 
 One AWS Instance running Thor, ROXIE, Middleware Services and the Landing Zone. For Thor, we have setup four slave processes. ROXIE is setup as a single process.
 
-# 2. Defining the ECL application project structure
+![](images/cluster_setup.jpg)
+
+# 2. Defining the ECL application project structure and workflow
 
 We will VS Code with the ECL plugin as our IDE for this project.
 
@@ -78,6 +80,8 @@ Builds the Generalized Linear Model by using the training data of pickup_year, p
 **10_Data_Export_Job.ecl**
 
 Contains the code to export the data from Thor into the landing zone
+
+![](images/data_workflow.jpg)
 
 # 3. Programming
 
