@@ -277,7 +277,7 @@ Edit the Files.ecl and add:
             raw file.
         */
     
-        EXPORT taxi_clean_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_clean.thor';
+        EXPORT taxi_clean_file_path := file_scope + '::taxi::out::yellow_tripdata_clean.thor';
         
         EXPORT taxi_clean_layout := RECORD
             UNSIGNED1   vendor_id;
@@ -356,7 +356,7 @@ As we have done in the previous steps, let us create a layout and dataset entry 
             The cleaned file is enriched to add important attributes
         */
 
-        EXPORT taxi_enrich_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_enriched.thor';
+        EXPORT taxi_enrich_file_path := file_scope + '::taxi::out::yellow_tripdata_enriched.thor';
         
         EXPORT taxi_enrich_layout := RECORD
             taxi_clean_layout;
@@ -428,7 +428,7 @@ Modify the Files.ecl to add an analyzed layout. The file stores the daily trip c
         /* 
             Create a simple attribute file that records the counts of trips daily
         */
-        EXPORT taxi_analyze_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_analyze.thor';
+        EXPORT taxi_analyze_file_path := file_scope + '::taxi::out::yellow_tripdata_analyze.thor';
         
         EXPORT taxi_analyze_layout := RECORD
             Std.Date.Date_t    pickup_date;
@@ -539,7 +539,7 @@ Modify the Files.ecl to add:
             Create a training file to train a GLM for predecting trip counts for a future date
         */
 
-        EXPORT taxi_train_file_path := file_scope + '::taxi::out::yellow_tripdata_2015_train.thor';
+        EXPORT taxi_train_file_path := file_scope + '::taxi::out::yellow_tripdata_train.thor';
 
         EXPORT taxi_train_layout := RECORD
             unsigned2 pickup_year;
