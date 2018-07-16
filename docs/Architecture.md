@@ -139,7 +139,7 @@ The Middleware are a set of services that manage Thor clusters. They are respons
 The Thor middleware components:
 ![](images/middleware.png)
 
-A Thor cluster can run on a single compute node or multiple compute node as show below. 
+A Thor cluster can run on a single compute node or multiple compute node as shown below. 
 
 
 ![](images/thor-single-server.png)

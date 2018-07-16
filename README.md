@@ -1,5 +1,7 @@
 # Welcome to an Introduction to HPCC Systems
-HPCC Systems is the Open Source **Data Lake** technology developed by LexisNexis Risk Solutions to solve Big Data problems for the LexisNexis business.
+
+HPCC Systems is the Open Source [**Data Lake**](https://en.wikipedia.org/wiki/Data_lake) technology developed by LexisNexis Risk Solutions to solve Big Data problems for the LexisNexis business.
+
 
 HPCC Systems is designed to host and process petabyte of data and integrate data from thousands of sources. 
 
@@ -24,7 +26,7 @@ The goal of the architecture discussion is to provide an introduction of HPCC Sy
 
 
 ## An introduction to ECL the programming language
-The goal of the ECL programming discussion is to introduce the data scientist to the minimum tools needed to solution a real-world problem. You will be amazed how quickly you can get started and start solving problems. 
+The goal of the ECL programming discussion is to introduce the data scientist to the minimum tools needed to solve a real-world problem. You will be amazed how quickly you can get started and start solving problems. 
 
 [Go to  ECL Introduction Page](docs/ECL_Introduction.md)
 
@@ -35,7 +37,7 @@ Understand how to code a program using modular structure that enable you to crea
 [Go to  ECL Programming Structures](docs/ECL_Programming_Structures.md)
 
 ## An introduction to ECL for Spark Programmers
-How can Spark programmers get them started quickly without having to learn ECL from scratch? 
+How can Spark programmers get started quickly without having to learn ECL from scratch? 
 
 [Go to  Tutorial](docs/ECL_For_Spark_Coders.md)
 
