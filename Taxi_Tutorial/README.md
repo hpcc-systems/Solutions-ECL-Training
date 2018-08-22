@@ -104,7 +104,7 @@ EXPORT file_scope := '~training-samples';
             Location of raw file on the landing zone
         */
 
-        EXPORT taxi_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_2015-01_10000.csv';
+        EXPORT taxi_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_2015-01.csv';
 
         /*
             Raw file layout and dataset after it is imported into Thor

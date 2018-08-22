@@ -1,10 +1,10 @@
-00000000 2018-05-09 16:15:24 21220  9328 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\auditlib.dll[lib_auditlib] version = AUDITLIB 1.0.1
-00000001 2018-05-09 16:15:24 21220  9328 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\debugservices.dll[lib_debugservices] version = DEBUGSERVICES 1.0.1
-00000002 2018-05-09 16:15:24 21220  9328 Plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\dmetaphone.dll exports getECLPluginDefinition but does not export ECL - not loading
-00000003 2018-05-09 16:15:24 21220  9328 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\fileservices.dll[lib_fileservices] version = FILESERVICES 2.1.3
-00000004 2018-05-09 16:15:24 21220  9328 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\logging.dll[lib_logging] version = LOGGING 1.0.1
-00000005 2018-05-09 16:15:24 21220  9328 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\parselib.dll[lib_parselib] version = PARSELIB 1.0.1
-00000006 2018-05-09 16:15:24 21220  9328 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\stringlib.dll[lib_stringlib] version = STRINGLIB 1.1.14
-00000007 2018-05-09 16:15:24 21220  9328 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\timelib.dll[lib_timelib] version = TIMELIB 1.0.0
-00000008 2018-05-09 16:15:24 21220  9328 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\unicodelib.dll[lib_unicodelib] version = UNICODELIB 1.1.06
-00000009 2018-05-09 16:15:24 21220  9328 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\workunitservices.dll[lib_WORKUNITSERVICES] version = WORKUNITSERVICES 1.0.2
+00000000 2018-08-22 15:11:16 13288 16396 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\auditlib.dll[lib_auditlib] version = AUDITLIB 1.0.1
+00000001 2018-08-22 15:11:16 13288 16396 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\debugservices.dll[lib_debugservices] version = DEBUGSERVICES 1.0.1
+00000002 2018-08-22 15:11:16 13288 16396 Plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\dmetaphone.dll exports getECLPluginDefinition but does not export ECL - not loading
+00000003 2018-08-22 15:11:16 13288 16396 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\fileservices.dll[lib_fileservices] version = FILESERVICES 2.1.3
+00000004 2018-08-22 15:11:16 13288 16396 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\logging.dll[lib_logging] version = LOGGING 1.0.1
+00000005 2018-08-22 15:11:16 13288 16396 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\parselib.dll[lib_parselib] version = PARSELIB 1.0.1
+00000006 2018-08-22 15:11:16 13288 16396 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\stringlib.dll[lib_stringlib] version = STRINGLIB 1.1.14
+00000007 2018-08-22 15:11:16 13288 16396 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\timelib.dll[lib_timelib] version = TIMELIB 1.0.0
+00000008 2018-08-22 15:11:16 13288 16396 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\unicodelib.dll[lib_unicodelib] version = UNICODELIB 1.1.06
+00000009 2018-08-22 15:11:16 13288 16396 Loading plugin C:\Program Files (x86)\HPCCSystems\6.4.14\clienttools\plugins\workunitservices.dll[lib_WORKUNITSERVICES] version = WORKUNITSERVICES 1.0.2
