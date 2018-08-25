@@ -217,7 +217,7 @@ OUTPUT(Taxi.Files.taxi_raw_ds,,NAMED('Raw_Taxi_Data'));
 NOTE: To perform this step, you will need the Data Patterns bundle. Use the ecl command line tool to install this bundle globally:
 
 ```
-ecl bundle install https://github.com/dcamper/DataPatterns.git
+ecl bundle install https://github.com/hpcc-systems/DataPatterns.git
 
 ```
 
