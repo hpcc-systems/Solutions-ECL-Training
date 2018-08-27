@@ -1,6 +1,6 @@
 # Welcome to an Introduction to HPCC Systems
 
-HPCC Systems is the Open Source [**Data Lake**](https://en.wikipedia.org/wiki/Data_lake) technology developed by LexisNexis Risk Solutions to solve Big Data problems for the LexisNexis business.
+HPCC Systems is the Open Source [**Data Lake**](https://en.wikipedia.org/wiki/Data_lake) technology developed by LexisNexis Risk Solutions to solve Big Data problems for the LexisNexis business. The first version of technology, based on distributed parallel processing, was developed in the year 2000. 
 
 
 HPCC Systems is designed to host and process petabyte of data and integrate data from thousands of sources. 
@@ -12,7 +12,8 @@ HPCC Systems is used and certified in production environments within LexisNexis.
 The following are a few facts that you need to keep in mind:
 
 * HPCC Systems is licensed under the Apache 2.0 License
-* LexisNexis uses the Open Source version
+* HPCC Systems is free in the same sense as Ubuntu or CentoOS is free 
+* HPCC Systems releases are tested for LexisNexis production workloads
 * 100% free online training and documentation
 * AWS integration with Open Source cloud formation templates
 * 100% free support for companies willing to build their own HPCC Systems expertise
