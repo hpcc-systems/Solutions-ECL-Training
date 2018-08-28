@@ -104,7 +104,7 @@ EXPORT file_scope := '~training-samples';
             Location of raw file on the landing zone
         */
 
-        EXPORT taxi_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_2015-01_10000.csv';
+        EXPORT taxi_lz_file_path := '/var/lib/HPCCSystems/mydropzone/yellow_tripdata_2015-01.csv';
 
         /*
             Raw file layout and dataset after it is imported into Thor
@@ -217,7 +217,7 @@ OUTPUT(Taxi.Files.taxi_raw_ds,,NAMED('Raw_Taxi_Data'));
 NOTE: To perform this step, you will need the Data Patterns bundle. Use the ecl command line tool to install this bundle globally:
 
 ```
-ecl bundle install https://github.com/dcamper/DataPatterns.git
+ecl bundle install https://github.com/hpcc-systems/DataPatterns.git
 
 ```
 
