@@ -1,0 +1,6 @@
+[submodule "Taxi_Tutorial/Dataseers/ML/ML_Core"]
+	path = Taxi_Tutorial/Dataseers/ML/ML_Core
+	url = https://github.com/hpcc-systems/ML_Core/
+[submodule "Taxi_Tutorial/DataPatterns"]
+	path = Taxi_Tutorial/DataPatterns
+	url = https://github.com/hpcc-systems/DataPatterns.git
