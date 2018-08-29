@@ -1,9 +1,9 @@
-#Summary 
+# Summary 
 
 This example has been developed by DataSeers (http://DataSeers.ai)
 
 
-#PREREQUISITES 
+# Prerequisites 
 
 1)  Please follow the prerequisites of the parent project
 		
