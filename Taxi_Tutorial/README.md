@@ -23,6 +23,20 @@ To understand these steps, let us consider a concrete example. We will start wit
 
 The first step in building an ECL application is to build a simplistic approach to quickly consume the data and to complete the first two steps above. To accomplish this, it is best to consider a smaller subset of the Taxi dataset. It will make it easier and faster to accomplish the tasks.
 
+# Prerequisites
+
+1. Install VS Code IDE (https://code.visualstudio.com/)
+2. Install ECL Extension for VS Code (https://github.com/hpcc-systems/vscode-ecl)
+3. Install ECL Client Tools (https://hpccsystems.com/download#HPCC-Platform)
+4. Install the required bundles (The ecl.exe is located in the clienttools\bin directory e.g. C:\Program Files\HPCCSystems\6.4.24-1\clienttools\bin>)
+    1. ecl bundle install https://github.com/hpcc-systems/ML_Core.git
+    2. ecl bundle install https://github.com/hpcc-systems/PBblas.git
+    3. ecl bundle install https://github.com/hpcc-systems/GLM.git
+    4. ecl bundle install https://github.com/hpcc-systems/DataPatterns.git
+5. Clone the repository https://github.com/hpcc-systems/Solutions-ECL-Training.git
+6. Open VS Code with Taxi_Tutorial as the root folder
+
+
 # 1. Understanding the cluster setup
 
 One AWS Instance running Thor, ROXIE, Middleware Services and the Landing Zone. For Thor, we have setup four slave processes. ROXIE is setup as a single process.
