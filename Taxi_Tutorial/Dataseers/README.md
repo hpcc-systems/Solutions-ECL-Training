@@ -1,17 +1,41 @@
 #Summary 
 
-Understanding some tips and tricks to make ECL fun 
+This example has been developed by DataSeers (http://DataSeers.ai)
 
 
 #PREREQUISITES 
 
-1) You need to make sure that Taxi_Tutorial is the working directory in VSCode.
-2) The Following submodules will be reqired to run the code.Use the following code (git submodule add #BELOW URL#)
-		a)https://github.com/hpcc-systems/ML_Core/
-		b)https://github.com/hpcc-systems/DataPatterns
+1)  Please follow the prerequisites of the parent project
 		
 
-**taxiData_Examples**
+**taxiData_Examples.ecl**
 
-You can run this file independly and you will find comments on what each task does.
-The idea behind this is to provided illustration on how to use some basic ecl functionlatities
+You can run this file independently and you will find comments on what each task does.
+The idea behind this is to provided illustration on how to use some basic ecl functions
+
+In addition, the following slides provides an overview of the included functionality: 
+
+![](images/spray.JPG)
+
+![](images/record_structure.JPG)
+
+![](images/reading_sprayed_file.JPG)
+
+![](images/basic_ecl_functions.JPG)
+
+![](images/massaging_datasets.JPG)
+
+![](images/gathering_required_fields.JPG)
+
+![](images/identifying_unique_values.JPG)
+
+![](images/analysis_of_trends_1.JPG)
+
+![](images/analysis_of_trends_2.JPG)
+
+![](images/creating_key_value_pair.JPG)
+
+![](images/ml_1.JPG)
+
+![](images/ml_2.JPG)
+
