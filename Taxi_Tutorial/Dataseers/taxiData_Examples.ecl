@@ -1,5 +1,5 @@
 IMPORT STD;
-IMPORT Dataseers.ML AS ML;
+IMPORT ML_Core;
 
 DB(sym) := MACRO
     OUTPUT(CHOOSEN(sym, 1000), NAMED(#TEXT(sym)));
@@ -122,7 +122,7 @@ assignSequentialNumberPerDate := PROJECT(
                                         SELF := LEFT
                                         ));
 
-ML.ML_Core.Types.NumericField XF(dsTaxi L, integer C) := TRANSFORM
+ML_Core.Types.NumericField XF(dsTaxi L, integer C) := TRANSFORM
    SELF.id := C;
    SELF.number := assignSequentialNumberPerDate(pickup_date = L.pickup_date)[1].Num;
    SELF.value := L.fare_amount;
@@ -130,7 +130,7 @@ ML.ML_Core.Types.NumericField XF(dsTaxi L, integer C) := TRANSFORM
 END;
 getSequentialNumberForAll := PROJECT(dsTaxi,XF(LEFT,COUNTER));
 
-simpleAggregations := ML.ML_Core.FieldAggregates(getSequentialNumberForAll).Simple;
+simpleAggregations := ML_Core.FieldAggregates(getSequentialNumberForAll).Simple;
 
 OutputRec := RECORD
     RECORDOF(simpleAggregations);
