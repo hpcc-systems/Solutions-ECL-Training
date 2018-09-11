@@ -1,5 +1,5 @@
 IMPORT Taxi;
-IMPORT Visualizer;
+IMPORT Visualizer.Visualizer;
 
 cnt_by_weekday_ds:= TABLE(Taxi.Files.taxi_enrich_ds, 
              {pickup_day_of_week, UNSIGNED4 cnt := COUNT(GROUP)}, 

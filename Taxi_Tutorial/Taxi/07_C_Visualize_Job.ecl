@@ -9,6 +9,7 @@ moderec := RECORD
 patterncountrec := RECORD
    string data_pattern;
    unsigned4 rec_count;
+   string example;
   END;
 
 patterns_layout := RECORD
@@ -30,7 +31,7 @@ patterns_layout := RECORD
 patterns_ds := DATASET(Taxi.Files.taxi_data_patterns_raw_file_path, patterns_layout, THOR);
 
 OUTPUT(patterns_ds, {attribute, cardinality}, NAMED('cardinality'));
-Visualizer.MultiD.Bar('cardinality',, 'cardinality');
+Visualizer.Visualizer.MultiD.Bar('cardinality',, 'cardinality');
 OUTPUT(patterns_ds, {attribute, fill_rate}, NAMED('fill_rate'));
-Visualizer.MultiD.Bar('fill_rate',, 'fill_rate');
+Visualizer.Visualizer.MultiD.Bar('fill_rate',, 'fill_rate');
 
